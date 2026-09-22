@@ -1,0 +1,9 @@
+REPO_PATH = 'data/raw/vllm-0.10.1/'
+INDEX_PATH = 'data/processed/bm25_index'
+CHUNKS_PATH = 'data/processed/chunks'
+OUTPUT_PATH = 'data/output/'
+ANSWER_TEMPLATE = 'user_answer_'
+SEARCH_TEMPLATE = 'user_search_'
+MAX_CHUNK_SIZE = 2000
+CHUNK_OVERLAP: float = 0.1
+DATASET_UNANSWERED = 'data/datasets/UnansweredQuestions/dataset_code_public.json'
