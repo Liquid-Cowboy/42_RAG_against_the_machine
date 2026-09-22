@@ -8,7 +8,20 @@ import json
 
 
 class Retriever():
+    """Utility class to deal with retrieval events."""
     def __init__(self, index_path: Path, chunks_path: Path) -> None:
+        """
+        Instantiates the retriever object.
+
+        Parameters:
+            -index_path: Path object leading to index folder
+            -chunks_path: Path object leading to chunks file
+        
+        Atributes:
+            -self.retriever: bm25 algorithm based retriever
+            -self.sources: list of MinimalSource objs representing
+            units of information
+        """
         try:
             self.retriever = bm25s.BM25.load(index_path)
         except Exception as e:
@@ -18,8 +31,8 @@ class Retriever():
                         for s in json.loads(chunks_path.read_text(
                             encoding='utf-8', errors='ignore'))]
         if not self.sources:
-            print('No sources to retrieve.')
-            exit(0)
+            raise ValueError('No sources to retrieve.')
+
 
     def _retrieve_single_query(self,
                                query: str | UnansweredQuestion,

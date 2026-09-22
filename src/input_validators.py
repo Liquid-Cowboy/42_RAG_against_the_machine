@@ -14,16 +14,16 @@ class InputError(Exception):
 
 class CLIArgs(BaseModel):
     # index
-    max_chunk_size: int = Field(default=MAX_CHUNK_SIZE, gt=0)
-    index_path: Path = Path(INDEX_PATH)
-    chunks_path: Path = Path(CHUNKS_PATH)
-    repository_path: Path = Path(REPO_PATH)
+    max_chunk_size: int = Field(default=MAX_CHUNK_SIZE, gt=0, le=2000)
+    index_path: Path = Field(default=Path(INDEX_PATH))
+    chunks_path: Path = Field(default=Path(CHUNKS_PATH))
+    repository_path: Path = Field(default=Path(REPO_PATH))
 
     # search / answer
     query: str = ''
     k: int = Field(default=5, gt=0)
-    dataset_path: Path = Path(DATASET_UNANSWERED)
-    save_directory: Path = Path(OUTPUT_PATH)
+    dataset_path: Path = Field(default=Path(DATASET_UNANSWERED))
+    save_directory: Path = Field(default=Path(OUTPUT_PATH))
 
     def validate_index(self) -> None:
         self._validate_path(self.index_path, 'index_path')
